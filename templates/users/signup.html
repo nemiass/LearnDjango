@@ -1,0 +1,27 @@
+{% extends "users/base.html" %}
+
+{% block head_content %}
+    <title>FakeGram Sigup</title>
+{% endblock %}
+
+{% block container %}
+    <h1 class="text-center mb-3">Signup</h1>
+    
+    <form method="POST" action="{% url 'users:signup' %}">
+        {% csrf_token %}
+        <!-- <input type="text" placeholder="Username" name="username" class="form-control mb-2" required="true">
+        <input type="password" placeholder="Password" name="password" class="form-control mb-2">
+        <input type="password" placeholder="Password Confirmation" name="password_confirmation" class="form-control mb-2">
+
+        <input type="text" placeholder="First Name" name="first_name" class="form-control mb-2">
+        <input type="text" placeholder="Last Name" name="last_name" class="form-control mb-2">
+        <input type="mail" placeholder="E-mail" name="email" class="form-control mb-2"> -->
+        {% comment %}
+        Como ya tenemos nuestro clase Form creada, para mostrarlo podemos hacerlo de la 
+        siguiente forma, a nuestro form le ejecutamos as_p, y con eso este se muestra
+        el formulario en listas <p></p>
+        {% endcomment %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary btn-block w-100">Register</button>
+    </form>
+{% endblock %}

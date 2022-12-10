@@ -1,0 +1,28 @@
+{% extends "users/base.html" %}
+
+{% block head_content %}
+<title>FakeGram Sign in</title>
+{% endblock %}
+
+{% block container %}
+<h1 class="text-center mb-3">Login</h1>
+
+{# esto ya no lo usamos porque ustamos usando un LoginView class para la vista #}
+<!-- {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}  -->
+
+    {# Ahora usamos form.erros para verficair si hay errores, como ya sabemos solo habra un error#}
+    {# ese será el de que esten mal los datos , usamos form, porque estamos usando un form #}
+{% if form.errors %}
+<div class="alert alert-danger">Your username and password didn't match. Please try again.</div>
+{% endif %}
+
+<form method="POST" action="{% url 'users:login' %}">
+    {% csrf_token %}
+    <input type="text" placeholder="Username" name="username" class="form-control mb-2">
+    <input type="password" placeholder="Password" name="password" class="form-control mb-2">
+    <button type="submit" class="btn btn-primary btn-block w-100">Sign in</button>
+</form>
+<p class="mt-4">Dont't hava a account yet? <a href="{% url 'users:signup' %}">Sign up here.</a></p>
+{% endblock %}

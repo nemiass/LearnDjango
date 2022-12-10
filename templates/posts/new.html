@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head_content %}
+<title>Fakegram Feed</title>
+{% endblock %}
+
+{% block container %}
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-6 pt-3 pb-3" id="profile-box">
+            <h4 class="mb-4">Post a new Photo</h4>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {# inputs invisibles con los primary keys de user y profile #}
+                <input type="hidden" name="user" value="{{ user.pk }}">
+                <input type="hidden" name="profile" value="{{ profile.pk }}">
+
+                {# Title Field #}
+                <div class="form-group">
+                    <label for="">Title</label>
+                    <input type="text" class="form-control {% if form.title.errors %}is-invalid{% endif %}" name="title"
+                        placeholder="title">
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                        {{error}}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                {# Photo Field #}
+                <div class="form-group">
+                    <label for="">Photo</label>
+                    <input type="file" class="form-control {% if form.photo.errors %}is-invalid{% endif %}" name="photo"
+                        placeholder="photo">
+                    <div class="invalid-feedback">
+                        {% for error in form.photo.errors %}
+                        {{error}}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mt-5 w-100">Publish</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

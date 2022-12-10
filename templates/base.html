@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    {% comment "" %}
+        - Este es un bloque de contenido que será seteado por el template que extienda
+        de este template base
+    {% endcomment %}
+    {% block  head_content %}{% endblock  %}
+    
+    {% comment %} 
+    - Static
+    Estos se usan atravez  de la aplicacion para pintar datos, san imagenes, archivos de jss y css ,etc
+    - Llamamos al load static primero para, luego con la palabra "static" de los href, lo que hace es
+    cargar dinamicamente la ruta de la ruta estática
+    Nota: "Lo que hace el 'load static'" es cargar el tag 'estatic' para poder usarlo, el que se encarga
+    de hacer esa busqueda de archivos luego de hacer el tag son nuestros "staticfiles finders" que
+    definimos en nuestros "settings.py" de nuestra app principal
+    {% endcomment %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+    {% comment "" %}
+        - De esta forma incluimos un layout, cuando queremos incrustar un pedaso de layout
+    {% endcomment %}
+    {% include "nav.html" %}    
+    
+    {% comment "" %}
+        - Este es un bloque de contenido que será seteado por el template que extienda
+        de este template base
+    {% endcomment %}
+    <div class="container mt-5">
+        {% block container %}
+        {% endblock  %}
+    <div>
+
+</body>
+</html>
